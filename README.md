@@ -1,7 +1,11 @@
 # Komanda_34_MIP
 Pirmais praktiskais darbs, Mākslīgā Intelekta Pamati
 
-# Spēles apraksts 
+## Papildu prasības programmatūrai 
+
+Spēles sākumā spēles programmatūra gadījuma ceļā saģenerē 5 skaitļus diapazonā no 20000 līdz 30000, bet tādus, kas sākotnēji dalās ar 3, 2 un 4. Cilvēks-spēlētājs izvēlas, ar kuru no saģenerētajiem skaitļiem viņš vēlas sākt spēli. 
+
+## Spēles apraksts 
 Spēles sākumā ir dots cilvēka-spēlētāja izvēlētais skaitlis.
 Abiem spēlētājiem ir 0 punktu.
 
