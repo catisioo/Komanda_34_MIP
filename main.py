@@ -4,5 +4,8 @@ from functions import *
 print(generate_numbers())
 
 # test
-root = Node(GameNodeData(27516, 0, 4))
-root.PrintTree()
+
+# root = TreeNode(GameNodeData(27516, 0, 0))
+
+tree = GenerateTree(GameNodeData(27516, 0, 0))
+tree.print_tree()
