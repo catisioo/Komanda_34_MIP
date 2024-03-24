@@ -55,8 +55,9 @@ class TreeNode:
 
 def GenerateTree(number, player1=0, player2=0, node_level=0, minmax_value=0):
     
-    if number <= 10:
-        return None
+# parbaudei jabut beigas, nevis sakuma:    
+#    if number <= 10:
+#        return None
     
     root = TreeNode(number, player1, player2, node_level, minmax_value)
 
@@ -93,6 +94,8 @@ def GenerateTree(number, player1=0, player2=0, node_level=0, minmax_value=0):
             root.add_child(child)
 
     return root        
-    
+    # parbaudei jabut beigas, nevis sakuma:
+    if number <= 10:
+        return None
 
 
