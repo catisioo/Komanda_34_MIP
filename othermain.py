@@ -137,10 +137,12 @@ def chose_number(value):
     #ja izvēlas pareizo skaitli
   elif value in gameNumbers:
     print("izvelejos skaitli")
+    print(value)
     global number
     number = value
     print('selected number')
     print(number)
+    return number
 
 global firstGoes 
 firstGoes = 1

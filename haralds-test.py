@@ -2,31 +2,39 @@ import tkinter as tk
 from functions import *
 from othermain import *
 
+global gui_number
 gui_number = generate_numbers()
+global is_game_runing
+is_game_runing = 0 
 
 root = tk.Tk()
 
 def gui_numuri():
+    global gui_number
     gui_number = generate_numbers()
     print(gui_number)
     return gui_number
 
 def retrieve_current_number():
-    return print_currentNr   
+    number = print_currentNr()
+    return number  
 
-def update_current_number():
+#Every Turn
+def update_current_number(value):
+    print(value)
     currentNr = retrieve_current_number()
-    currentNrLabel2 = currentNrLabel2.config(text= currentNr)
+    print(currentNr)
+    currentNrLabel2.config(text= currentNr)
 
+# New Game
 def update_all_numbers(gui_number):
     
-    currentNrLabel2.config(text='')
+    currentNrLabel2.config(text="")
     num1button.config(text=gui_number[0])
     num2button.config(text=gui_number[1])
     num3button.config(text=gui_number[2])
     num4button.config(text=gui_number[3])
     num5button.config(text=gui_number[4])
-
 
 root.geometry("900x600")
 root.title("1. praktiskais darbs")
@@ -60,13 +68,13 @@ num5button.pack(padx=20, pady=10)
 rightFrame = tk.Frame(root)
 rightFrame.place(x=600, y=200, width=200, height=300)
 
-div2button = tk.Button(rightFrame, text="/2", font=('Cascadia Mono ExtraLight', 16))
+div2button = tk.Button(rightFrame, text="/2", font=('Cascadia Mono ExtraLight', 16),command=lambda: update_current_number(2))
 div2button.pack(padx=20, pady=20)
 
-div3button = tk.Button(rightFrame, text="/3", font=('Cascadia Mono ExtraLight', 16))
+div3button = tk.Button(rightFrame, text="/3", font=('Cascadia Mono ExtraLight', 16),command=lambda: update_current_number(3))
 div3button.pack(padx=20, pady=0)
 
-div4button = tk.Button(rightFrame, text="/4", font=('Cascadia Mono ExtraLight', 16))
+div4button = tk.Button(rightFrame, text="/4", font=('Cascadia Mono ExtraLight', 16),command=lambda: update_current_number(4))
 div4button.pack(padx=20, pady=20)
 
 def radiobutton_izvele():
@@ -124,13 +132,21 @@ newGameFrame = tk.Frame(root)
 newGameFrame.place(x=760, y=520)
 
 def new_game():
-    
     guiNr = gui_numuri()
     print(guiNr)
     update_all_numbers(guiNr)
+    global is_game_runing
+    is_game_runing = 0
+
+def start_game():
+    global is_game_runing
+    is_game_runing = 1 
     
+startGameButton = tk.Button((newGameFrame), text="Start Game", font=('Cascadia Mono ExtraLight', 10), command = start_game)
+startGameButton.pack(padx=0, pady=0)
+
 newGamebutton = tk.Button(newGameFrame, text="New Game", font=('Cascadia Mono ExtraLight', 10), command=new_game)
-newGamebutton.pack(padx=20, pady=20)
+newGamebutton.pack(padx=0, pady=0)
 
 punktuFrame = tk.Frame(root)
 punktuFrame.place(x=360, y=520)
