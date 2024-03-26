@@ -140,7 +140,8 @@ def new_game():
 
 def start_game():
     global is_game_runing
-    is_game_runing = 1 
+    is_game_runing = 1
+    update_game_status(is_game_runing)
     
 startGameButton = tk.Button((newGameFrame), text="Start Game", font=('Cascadia Mono ExtraLight', 10), command = start_game)
 startGameButton.pack(padx=0, pady=0)

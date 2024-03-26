@@ -22,8 +22,17 @@ def botvbot():
 turn = 0
 p1Points = 0
 p2Points = 0
+
 global gameNumbers
 gameNumbers = 0
+
+global game_status
+game_status = 0
+
+def update_game_status(is_game_runing):
+    global games_status
+    game_status = is_game_runing
+    return games_status
 
 def generate_numbers():
   numbers = []
@@ -131,18 +140,20 @@ def chose_number(value):
   global gameNumbers
   print(gameNumbers)
   print(value)
-  
-  if value not in gameNumbers:
-    print("skaitlis nav izvelets")
-    #ja izvēlas pareizo skaitli
-  elif value in gameNumbers:
-    print("izvelejos skaitli")
-    print(value)
-    global number
-    number = value
-    print('selected number')
-    print(number)
-    return number
+  if(game_status == 0):
+    if value not in gameNumbers:
+      print("skaitlis nav izvelets")
+      #ja izvēlas pareizo skaitli
+    elif value in gameNumbers:
+      print("izvelejos skaitli")
+      print(value)
+      global number
+      number = value
+      print('selected number')
+      print(number)
+      return number
+  else:
+    print("Speles laika nevar mainit sākuma skaitli!!")
 
 global firstGoes 
 firstGoes = 1
