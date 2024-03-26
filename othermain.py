@@ -23,14 +23,17 @@ def botvbot():
 turn = 0
 p1Points = 0
 p2Points = 0
-
+global gameNumbers
+gameNumbers = 0
 
 def generate_numbers():
   numbers = []
+  global gameNumbers
   while len(numbers) < 5:
     number = random.randint(20000, 30000)
     if number % 2 == 0 and number % 3 == 0 and number % 4 == 0:
       numbers.append(number)
+  gameNumbers = numbers   
   return numbers
 
 
@@ -123,171 +126,187 @@ def alpha_beta(number, depth, alpha, beta, player):
 
 #ģenerē spēles ciparus
 
-gameNumbers = generate_numbers()
+#gameNumbers = generate_numbers()
+global number 
 number = 0
 machinevsmachine = False
 
+
 #spēles sākums
-
-while number not in gameNumbers:
+def chose_number(value):
+  global gameNumbers
   print(gameNumbers)
-  number = int(input('Izvēlieties sākuma skaitli : '))
-  #ja izvēlas pareizo skaitli
-  if number in gameNumbers:
-    break
+  print(value)
+  #value = str(value)
+  if value not in gameNumbers:
+    print("skaitlis nav izvelets")
+    #ja izvēlas pareizo skaitli
+  elif value in gameNumbers:
+    print("izvelejos skaitli")
+    global number
+    number = value
+    print('selected number')
+    print(number)
 
-firstGoes = input(
-    'Pirmais ies Lietotājs(1)  vai  Dators(2)  vai  Dators pret Datoru(3)? \n')
-algorithm = input('Algoritms: 1 - Minimax, 2 - Alpha-beta pruning: \n')
+firstGoes = ''
 
-if firstGoes == '1':
-  turn = 1
-elif firstGoes == '2':
-  turn = 2
-elif firstGoes == '3':
-  machinevsmachine = True
-  turn = 1
+def who_starts():
+  firstGoes = input(
+      'Pirmais ies Lietotājs(1)  vai  Dators(2)  vai  Dators pret Datoru(3)? \n')
+
+def algorithm():
+  algorithm = input('Algoritms: 1 - Minimax, 2 - Alpha-beta pruning: \n')
+
+def prepare_start():
+  if firstGoes == '1':
+    turn = 1
+  elif firstGoes == '2':
+    turn = 2
+  elif firstGoes == '3':
+    machinevsmachine = True
+    turn = 1
 
 # Mann vs Machine gamemode
+def man_vs_machine():
+  while machinevsmachine == False:
+    print(f'Skaitlis: {number}')
 
-while machinevsmachine == False:
-  print(f'Skaitlis: {number}')
+    if number <= 10:
+      break
+    if number % 2 != 0 and number % 3 != 0 and number % 4 != 0:
+      print(
+          "\n \n $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
+      )
+      print("\n \n WAOW SPELE BEIGUSIES 🪥")
+      print('  Skaitlis vairs nedalās ar 2,3 vai 4')
+      break
 
-  if number <= 10:
-    break
-  if number % 2 != 0 and number % 3 != 0 and number % 4 != 0:
-    print(
-        "\n \n $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-    )
-    print("\n \n WAOW SPELE BEIGUSIES 🪥")
-    print('  Skaitlis vairs nedalās ar 2,3 vai 4')
-    break
-
-  if turn == 1:
-    divisor = int(input('Izvēlieties dalītāju: \n'))
-    if divisor in [2, 3, 4] and number % divisor == 0:
-      number = number // int(divisor)
-      result(number)
-      turn = 2
-    else:
-      print('Nederīgs dalītājs')
-  else:
-    if algorithm == '1':
-      eval = minimax(number, 5, 1)
-      if eval == 0:
-        print(sad())
-
-      if eval == 2 or eval == 3 or eval == 4:
-
-        print(f'Datora izvēlētais dalītājs: {eval}')
-        number = number // eval
+    if turn == 1:
+      divisor = int(input('Izvēlieties dalītāju: \n'))
+      if divisor in [2, 3, 4] and number % divisor == 0:
+        number = number // int(divisor)
         result(number)
+        turn = 2
       else:
-        print(f'spēle beidzas {eval}')
-      turn = 1
+        print('Nederīgs dalītājs')
     else:
-      eval = alpha_beta(number, 5, float('-inf'), float('inf'), 1)
-      if eval == 2 or eval == 3 or eval == 4:
-        print('-----------------------------------')
-        print(f'Datora izvēlētais dalītājs: {eval}')
-        number = number // eval
-        result(number)
+      if algorithm == '1':
+        eval = minimax(number, 5, 1)
+        if eval == 0:
+          print(sad())
+
+        if eval == 2 or eval == 3 or eval == 4:
+
+          print(f'Datora izvēlētais dalītājs: {eval}')
+          number = number // eval
+          result(number)
+        else:
+          print(f'spēle beidzas {eval}')
+        turn = 1
       else:
-        print(f'spēle beidzas {eval}')
-      turn = 1
+        eval = alpha_beta(number, 5, float('-inf'), float('inf'), 1)
+        if eval == 2 or eval == 3 or eval == 4:
+          print('-----------------------------------')
+          print(f'Datora izvēlētais dalītājs: {eval}')
+          number = number // eval
+          result(number)
+        else:
+          print(f'spēle beidzas {eval}')
+        turn = 1
 
 # Machine vs Machine gamemode
 
-if machinevsmachine == True:
-  turn = random.randint(1, 2)
+def machine_vs_machine():
+  if machinevsmachine == True:
+    turn = random.randint(1, 2)
 
-while machinevsmachine == True:
-  print(f'Skaitlis: {number}')
+  while machinevsmachine == True:
+    print(f'Skaitlis: {number}')
 
-  if number <= 10:
-    break
-  if number % 2 != 0 and number % 3 != 0 and number % 4 != 0:
-    print(
-        "\n \n $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-    )
-    print("\n \n WAOW SPELE BEIGUSIES 🪥")
-    print('  Skaitlis vairs nedalās ar 2,3 vai 4')
-    break
+    if number <= 10:
+      break
+    if number % 2 != 0 and number % 3 != 0 and number % 4 != 0:
+      print(
+          "\n \n $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
+      )
+      print("\n \n WAOW SPELE BEIGUSIES 🪥")
+      print('  Skaitlis vairs nedalās ar 2,3 vai 4')
+      break
 
-  if turn == 1:
-    if algorithm == '1':
-      eval = minimax(number, 2, 1)
-      if eval == 0:
-        print(sad())
+    if turn == 1:
+      if algorithm == '1':
+        eval = minimax(number, 2, 1)
+        if eval == 0:
+          print(sad())
 
-      if eval == 2 or eval == 3 or eval == 4:
-        print('-----------------------------------')
-        print(f'Datora 1 izvēlētais dalītājs: {eval}')
-        number = number // eval
-        result(number)
+        if eval == 2 or eval == 3 or eval == 4:
+          print('-----------------------------------')
+          print(f'Datora 1 izvēlētais dalītājs: {eval}')
+          number = number // eval
+          result(number)
+        else:
+          print(f'spēle beidzas {eval}')
+        turn = 2
       else:
-        print(f'spēle beidzas {eval}')
-      turn = 2
+        eval = alpha_beta(number, 2, float('-inf'), float('inf'), 1)
+        if eval == 2 or eval == 3 or eval == 4:
+          print('-----------------------------------')
+          print(f'Datora 1 izvēlētais dalītājs: {eval}')
+          number = number // eval
+          result(number)
+        else:
+          print(f'spēle beidzas {eval}')
+        turn = 2
     else:
-      eval = alpha_beta(number, 2, float('-inf'), float('inf'), 1)
-      if eval == 2 or eval == 3 or eval == 4:
-        print('-----------------------------------')
-        print(f'Datora 1 izvēlētais dalītājs: {eval}')
-        number = number // eval
-        result(number)
+      if algorithm == '1':
+        eval = minimax(number, 2, 1)
+        if eval == 0:
+          print(sad())
+
+        if eval == 2 or eval == 3 or eval == 4:
+          print('-----------------------------------')
+          print(f'Datora 2 izvēlētais dalītājs: {eval}')
+          number = number // eval
+          result(number)
+        else:
+          print(f'spēle beidzas {eval}')
+        turn = 1
       else:
-        print(f'spēle beidzas {eval}')
-      turn = 2
+        eval = alpha_beta(number, 2, float('-inf'), float('inf'), 1)
+        if eval == 2 or eval == 3 or eval == 4:
+          print('-----------------------------------')
+          print(f'Datora 2 izvēlētais dalītājs: {eval}')
+          number = number // eval
+          result(number)
+        else:
+          print(f'spēle beidzas {eval}')
+        turn = 1
+
+  if machinevsmachine == False:
+    var = {
+        p1Points: "Speletajs 1 (Cilveks)",
+        p2Points: "Speletajs 2 (Dators)  (Tu zaudēji)"
+    }
   else:
-    if algorithm == '1':
-      eval = minimax(number, 2, 1)
-      if eval == 0:
-        print(sad())
-
-      if eval == 2 or eval == 3 or eval == 4:
-        print('-----------------------------------')
-        print(f'Datora 2 izvēlētais dalītājs: {eval}')
-        number = number // eval
-        result(number)
-      else:
-        print(f'spēle beidzas {eval}')
-      turn = 1
-    else:
-      eval = alpha_beta(number, 2, float('-inf'), float('inf'), 1)
-      if eval == 2 or eval == 3 or eval == 4:
-        print('-----------------------------------')
-        print(f'Datora 2 izvēlētais dalītājs: {eval}')
-        number = number // eval
-        result(number)
-      else:
-        print(f'spēle beidzas {eval}')
-      turn = 1
-
-if machinevsmachine == False:
-  var = {
-      p1Points: "Speletajs 1 (Cilveks)",
-      p2Points: "Speletajs 2 (Dators)  (Tu zaudēji)"
-  }
-else:
-  var = {p1Points: "Dators 1", p2Points: "Dators 2"}
-print("\n")
-print('Pirmā spēlētāja punkti: ' + str(p1Points))
-print('Otrā spēlētāja punkti: ' + str(p2Points))
-if p1Points > p2Points and machinevsmachine == False:
-  print(happi())
-  print("\n $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
-elif p1Points < p2Points:
-  print(sad())
-  print("\n $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
-if p2Points == p1Points:
-  print("\nNeizšķirts")
-  print("\n $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
-else:
-  print("\n Uzvar:", var.get(max(p2Points, p1Points)))
-  print("\n $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
-if machinevsmachine == True:
-  print(botvbot())
-  var = {p1Points: "Dators 1)", p2Points: "Dators 2"}
-  print(
-      "\n \n \n $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-  )
+    var = {p1Points: "Dators 1", p2Points: "Dators 2"}
+  print("\n")
+  print('Pirmā spēlētāja punkti: ' + str(p1Points))
+  print('Otrā spēlētāja punkti: ' + str(p2Points))
+  if p1Points > p2Points and machinevsmachine == False:
+    print(happi())
+    print("\n $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+  elif p1Points < p2Points:
+    print(sad())
+    print("\n $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+  if p2Points == p1Points:
+    print("\nNeizšķirts")
+    print("\n $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+  else:
+    print("\n Uzvar:", var.get(max(p2Points, p1Points)))
+    print("\n $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+  if machinevsmachine == True:
+    print(botvbot())
+    var = {p1Points: "Dators 1)", p2Points: "Dators 2"}
+    print(
+        "\n \n \n $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
+    )
