@@ -19,7 +19,6 @@ def botvbot():
       "\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⡤⠶⠒⠛⠋⠉⠉⠉⠉⠉⠉⠙⠓⠲⠦⣤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀      \n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡴⠞⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠳⢦⡀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣼⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀⠀⠀⠀⠀⠀⠹⣆⠀⠀⠀⠀⠀⠀⠀\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡾⠁⠀⠀⠀⠀⠀⠀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢳⠀⠀⠀⠀⠀⠀⢹⡄⠀⠀⠀⠀⠀⠀\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡼⠁⠀⠀⠀⠀⠀⠀⠀⠈⢣⡀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠈⡇⢀⠀⠀⠀⠀⠈⡇⠀⠀⠀⠀⠀⠀\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣷⠀⠀⠀⠀⠀⠀⠀⠀⠘⣇⠁⡞⠀⠀⠀⠀⠀⣿⠀⠀⠀⠀⠀⠀\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡇⠀⠀⠀⠀⠀⠀⠀⠀⢀⡾⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⢰⡃⠀⠀⠀⠀⠀⠈⢷⠀⠀⠀⠀ \n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡇⠀⠀⠀⠀⠀⠀⠀⠀⠸⣇⠀⠀⠀⠀⠀⣀⣤⣾⡇⠀⠏⢨⠓⢠⣄⠀⠀⠀⠀⣼⠃⠀⠀⠀⠀\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⣇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢦⣀⡀⣿⣋⣥⣤⣤⣝⣦⠀⣼⣿⣿⣯⣟⣶⡀⡾⠃⠀⠀⠀⠀⠀\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⡆⠀⠀⠀⠀⠀⠀⠀⡀⠀⠀⠒⠃⢧⣀⡘⠛⣋⣴⠇⠀⠘⢯⡈⠻⢟⡻⠿⣇⠀⠀⠀⠀⠀⠀\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠻⣆⠀⠀⠀⠀⠀⣼⠁⠀⠀⠀⠀⠀⠀⢉⣩⠽⠋⠀⠀⠀⢈⡿⠭⡍⠀⠀⠘⡇⠀⠀⠀⠀⠀\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠳⣄⡀⠀⠀⢷⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡄⠀⠀⠀⢸⠃⠀⠀⠀⠀⣰⡇⠀⠀⠀⠀⠀\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠓⢦⡬⠷⣤⣀⠀⠀⠀⠀⠀⢠⡞⣁⠀⠀⠀⢸⣷⠀⠀⣠⡾⠋⠀⠀⠀⠀⠀⠀\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣸⠁⠀⡇⠈⠉⠙⡆⠀⢠⠟⠖⠿⢷⡀⠀⣠⢿⡀⢸⠋⠀⠀⠀⠀⠀⠀⠀⠀\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⠏⠀⠀⡇⠀⠀⠀⡇⠀⡞⠀⠀⢀⣠⣍⣩⣅⠀⡇⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⣤⠏⠀⠀⠀⡇⠀⠀⠀⠀⠰⠇⢀⣴⣛⣡⣏⣱⣏⡇⠁⣾⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⣴⠶⠒⠛⣻⠟⠉⣱⠏⠀⠀⠀⢸⠃⠀⠀⠀⠀⠀⠀⠀⠘⢧⣀⠀⣀⡼⠁⠀⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀⠀⠀⠀⢀⣠⡴⠞⠛⠉⠀⠀⠀⠀⢰⠏⠀⠀⠁⠀⠀⠀⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠨⠭⠭⠀⠀⠀⣿⡀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀⣀⣤⠾⠟⠁⠀⠀⠀⠀⠀⠀⠀⢠⡟⠀⠀⠀⠀⠀⠀⠀⠀⠸⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠒⠲⢤⡀⠀⠈⠙⡆⠀⠀⠀⠀⠀⠀⠀\n⡾⠛⣁⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⠦⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇⠀⠀⢀⣷⣄⠀⠀⠀⠀⠀⠀\n⠚⠛⠉⠉⠉⠙⠛⠶⢦⣀⠀⠀⠀⠀⠸⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠓⠦⢤⣀⣀⠀⢀⣀⣤⢷⠶⠚⠋⠁⠹⡗⢦⣄⠀⠀⠀\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢷⡀⠀⠀⠀⠹⣄⠀⡴⢤⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⠏⠉⠉⠀⠀⣸⠃⠀⠀⠀⠀⠀⠀⠙⢷⣄⠀\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣆⠆⠀⠀⠙⢦⣙⣣⢇⠤⡄⠀⠀⠀⠀⠀⠀⠀⠈⠉⣁⠀⠀⠀⢀⡼⣣⠀⠀⠀⠀⠀⠀⠀⠀⠙⣿⣆"
   )
 
-
 turn = 0
 p1Points = 0
 p2Points = 0
@@ -63,9 +62,7 @@ def result(number):
       print('-----------------------------------')
       return 0
 
-
 #minmax algoritms
-
 
 def minimax(number, depth, player):
   if depth == 0 or number <= 10:
@@ -123,21 +120,18 @@ def alpha_beta(number, depth, alpha, beta, player):
           break
     return last_valid_divisor if last_valid_divisor is not None else beta
 
-
-#ģenerē spēles ciparus
-
-#gameNumbers = generate_numbers()
 global number 
 number = 0
-machinevsmachine = False
 
+global machinevsmachine 
+machinevsmachine = False
 
 #spēles sākums
 def chose_number(value):
   global gameNumbers
   print(gameNumbers)
   print(value)
-  #value = str(value)
+  
   if value not in gameNumbers:
     print("skaitlis nav izvelets")
     #ja izvēlas pareizo skaitli
@@ -148,16 +142,25 @@ def chose_number(value):
     print('selected number')
     print(number)
 
-firstGoes = ''
+global firstGoes 
+firstGoes = 1
 
-def who_starts():
-  firstGoes = input(
-      'Pirmais ies Lietotājs(1)  vai  Dators(2)  vai  Dators pret Datoru(3)? \n')
+global algorithm
+algorithm = 1
 
-def algorithm():
-  algorithm = input('Algoritms: 1 - Minimax, 2 - Alpha-beta pruning: \n')
+def who_starts(whoStarts):
+  global firstGoes
+  firstGoes = whoStarts
+  print(whoStarts)
+
+def algorithm(whichAlgorithm):
+  global algorithm
+  algorithm = whichAlgorithm
+  print(whichAlgorithm)
 
 def prepare_start():
+  global firstGoes
+
   if firstGoes == '1':
     turn = 1
   elif firstGoes == '2':
@@ -165,6 +168,10 @@ def prepare_start():
   elif firstGoes == '3':
     machinevsmachine = True
     turn = 1
+
+def print_currentNr():
+  global number
+  return number    
 
 # Mann vs Machine gamemode
 def man_vs_machine():

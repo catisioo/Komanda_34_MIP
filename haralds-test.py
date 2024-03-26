@@ -9,12 +9,33 @@ root = tk.Tk()
 def gui_numuri():
     gui_number = generate_numbers()
     print(gui_number)
+    return gui_number
+
+def retrieve_current_number():
+    return print_currentNr   
+
+def update_current_number():
+    currentNr = retrieve_current_number()
+    currentNrLabel2 = currentNrLabel2.config(text= currentNr)
+
+def update_all_numbers(gui_number):
+    
+    currentNrLabel2.config(text='')
+    num1button.config(text=gui_number[0])
+    num2button.config(text=gui_number[1])
+    num3button.config(text=gui_number[2])
+    num4button.config(text=gui_number[3])
+    num5button.config(text=gui_number[4])
+
 
 root.geometry("900x600")
 root.title("1. praktiskais darbs")
 
 currentNrLabel = tk.Label(root, text = "Current Number:", font = ('Cascadia Mono ExtraLight', 18))
 currentNrLabel.pack(padx = 20, pady = 40)
+
+currentNrLabel2= tk.Label(root, text='', font = ('Cascadia Mono ExtraLight', 18))
+currentNrLabel2.pack(padx = 20, pady = 40)
 
 # Piedāvāju šādu variantu (iekomentētā daļa):
 
@@ -51,8 +72,10 @@ div4button.pack(padx=20, pady=20)
 def radiobutton_izvele():
     if izveles_vertiba.get() == 1:
         izvades_teksts.set(f"Izvēlēts 1. spēlētājs")
+        who_starts(whoStarts = 1)
     else:
-        izvades_teksts.set(f"Izvēlēts 2. spēlētājs")                                                    
+        izvades_teksts.set(f"Izvēlēts 2. spēlētājs")
+        who_starts(whoStarts = 2)                                                    
 
 izveles_vertiba = tk.IntVar()
 izvades_teksts = tk.StringVar()
@@ -74,8 +97,10 @@ rb2.pack()
 def radiobutton_izvele2():
     if izveles_vertiba2.get() == 1:
         izvades_teksts2.set(f"Izvēlēts Mini-max algoritms")
+        algorithm(whichAlgorithm = 1)
     else:
         izvades_teksts2.set(f"Izvēlēts Alfa-beta algoritms")
+        algorithm(whichAlgorithm = 2) 
 
 radio2Frame = tk.Frame(root)
 radio2Frame.place(x=600, y=40, width=200, height=75)
@@ -98,7 +123,13 @@ algoritma_label.place(x=580, y=120)
 newGameFrame = tk.Frame(root)
 newGameFrame.place(x=760, y=520)
 
-newGamebutton = tk.Button(newGameFrame, text="New Game", font=('Cascadia Mono ExtraLight', 10), command=gui_numuri)
+def new_game():
+    
+    guiNr = gui_numuri()
+    print(guiNr)
+    update_all_numbers(guiNr)
+    
+newGamebutton = tk.Button(newGameFrame, text="New Game", font=('Cascadia Mono ExtraLight', 10), command=new_game)
 newGamebutton.pack(padx=20, pady=20)
 
 punktuFrame = tk.Frame(root)
