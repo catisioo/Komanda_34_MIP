@@ -30,9 +30,9 @@ global game_status
 game_status = 0
 
 def update_game_status(is_game_runing):
-    global games_status
+    global game_status
     game_status = is_game_runing
-    return games_status
+    print(game_status)
 
 def generate_numbers():
   numbers = []
@@ -96,9 +96,7 @@ def minimax(number, depth, player):
 
   return best_divisor if best_divisor is not None else 1
 
-
 #alfa beta algoritms
-
 
 def alpha_beta(number, depth, alpha, beta, player):
   if depth == 0 or number <= 10:
@@ -138,8 +136,10 @@ machinevsmachine = False
 #spēles sākums
 def chose_number(value):
   global gameNumbers
+  global game_status
   print(gameNumbers)
   print(value)
+  print(game_status)
   if(game_status == 0):
     if value not in gameNumbers:
       print("skaitlis nav izvelets")

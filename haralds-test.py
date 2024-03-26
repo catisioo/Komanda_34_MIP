@@ -4,8 +4,6 @@ from othermain import *
 
 global gui_number
 gui_number = generate_numbers()
-global is_game_runing
-is_game_runing = 0 
 
 root = tk.Tk()
 
@@ -135,11 +133,10 @@ def new_game():
     guiNr = gui_numuri()
     print(guiNr)
     update_all_numbers(guiNr)
-    global is_game_runing
     is_game_runing = 0
+    update_game_status(is_game_runing)
 
 def start_game():
-    global is_game_runing
     is_game_runing = 1
     update_game_status(is_game_runing)
     
