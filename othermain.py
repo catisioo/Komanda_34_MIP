@@ -30,9 +30,13 @@ global game_status
 game_status = 0
 
 def update_game_status(is_game_runing):
-    global game_status
-    game_status = is_game_runing
-    print(game_status)
+  global game_status
+  game_status = is_game_runing
+  print(game_status)
+
+def check_game_status():
+  global game_status
+  return  game_status
 
 def generate_numbers():
   numbers = []
@@ -139,19 +143,25 @@ def chose_number(value):
   global game_status
   print(gameNumbers)
   print(value)
+  print("Game Status:")
   print(game_status)
+  
   if(game_status == 0):
+    
     if value not in gameNumbers:
-      print("skaitlis nav izvelets")
+      print("skaitlis nav izvelets!")
       #ja izvēlas pareizo skaitli
+    
     elif value in gameNumbers:
-      print("izvelejos skaitli")
-      print(value)
+      print("izvelejos skaitli!")
       global number
       number = value
-      print('selected number')
+      
+      print('selected number:')
       print(number)
+      
       return number
+  
   else:
     print("Speles laika nevar mainit sākuma skaitli!!")
 
@@ -175,9 +185,11 @@ def prepare_start():
   global firstGoes
 
   if firstGoes == '1':
-    turn = 1
+    turn = 1 #Speli sāk Spēlētājs
+    
   elif firstGoes == '2':
-    turn = 2
+    turn = 2 #Spēli sāk AI
+  
   elif firstGoes == '3':
     machinevsmachine = True
     turn = 1
@@ -187,8 +199,10 @@ def print_currentNr():
   return number    
 
 # Mann vs Machine gamemode
-def man_vs_machine():
+def man_vs_machine(turn,divisor):
   while machinevsmachine == False:
+    
+    global number
     print(f'Skaitlis: {number}')
 
     if number <= 10:
@@ -202,11 +216,11 @@ def man_vs_machine():
       break
 
     if turn == 1:
-      divisor = int(input('Izvēlieties dalītāju: \n'))
       if divisor in [2, 3, 4] and number % divisor == 0:
         number = number // int(divisor)
         result(number)
         turn = 2
+        break
       else:
         print('Nederīgs dalītājs')
     else:
@@ -220,9 +234,11 @@ def man_vs_machine():
           print(f'Datora izvēlētais dalītājs: {eval}')
           number = number // eval
           result(number)
+          break
         else:
           print(f'spēle beidzas {eval}')
-        turn = 1
+        break
+
       else:
         eval = alpha_beta(number, 5, float('-inf'), float('inf'), 1)
         if eval == 2 or eval == 3 or eval == 4:
@@ -230,9 +246,11 @@ def man_vs_machine():
           print(f'Datora izvēlētais dalītājs: {eval}')
           number = number // eval
           result(number)
+          break
         else:
           print(f'spēle beidzas {eval}')
-        turn = 1
+          break
+        
 
 # Machine vs Machine gamemode
 
