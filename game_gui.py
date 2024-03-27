@@ -1,6 +1,7 @@
 import tkinter as tk
 from functions import *
 from othermain import *
+import time
 
 global gui_number
 gui_number = generate_numbers()
@@ -42,9 +43,12 @@ def game_tick(value):
     
     if game_status == 1:
         turn = 1
-        man_vs_machine(turn,divisor)
+        invalid = man_vs_machine(turn,divisor)
         turn = 2
         update_current_number(value)
+        if invalid == 1:
+            return "Invalid Divider"
+        time.wait(1)
         man_vs_machine(turn,divisor)
         update_current_number(value)
     else:

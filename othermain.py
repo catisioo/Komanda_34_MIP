@@ -223,6 +223,7 @@ def man_vs_machine(turn,divisor):
         break
       else:
         print('Nederīgs dalītājs')
+        return 1
     else:
       if algorithm == '1':
         eval = minimax(number, 5, 1)
