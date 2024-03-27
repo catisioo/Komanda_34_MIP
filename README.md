@@ -1,4 +1,6 @@
 # Komanda_34_MIP
+[Darba Atskaite](https://docs.google.com/document/d/1_jAYebU3eNN-idAFxJr3LAxoin-hyoyTrvu85Chqp9M/edit)
+
 Pirmais praktiskais darbs, Mākslīgā Intelekta Pamati
 
 ## Papildu prasības programmatūrai 
