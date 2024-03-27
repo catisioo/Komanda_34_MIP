@@ -97,11 +97,35 @@ currentNrLabel.pack(padx = 20, pady = 40)
 # punktuFrame = tk.Frame(root)
 # punktuFrame.place(x=360, y=520)
 
-# punkti1label = tk.Label(punktuFrame, text = "1. spēlētāja punkti: 0", font = ('Cascadia Mono ExtraLight', 10))
+# punkti1label = tk.Label(punktuFrame, text = "1. spēlētāja punkti: ", font = ('Cascadia Mono ExtraLight', 10))
 # punkti1label.pack()
 
-# punkti2label = tk.Label(punktuFrame, text = "2. spēlētāja punkti: 0", font = ('Cascadia Mono ExtraLight', 10))
+# punkti2label = tk.Label(punktuFrame, text = "2. spēlētāja punkti: ", font = ('Cascadia Mono ExtraLight', 10))
 # punkti2label.pack()
+
+# punktukartasFrame = tk.Frame(root)
+# punktukartasFrame.place(x=360, y=497)
+
+# punktukartaslabel = tk.Label(punktukartasFrame, text = "Kārtas punkti", font = ('Cascadia Mono ExtraLight', 10))
+# punktukartaslabel.pack()
+
+# punktikartas1label = tk.Label(punktukartasFrame, text = "0", font = ('Cascadia Mono ExtraLight', 10))
+# punktikartas1label.pack()
+
+# punktikartas2label = tk.Label(punktukartasFrame, text = "1", font = ('Cascadia Mono ExtraLight', 10))
+# punktikartas2label.pack()
+
+# punktukartas2Frame = tk.Frame(root)
+# punktukartas2Frame.place(x=500, y=497)
+
+# punktukartas2label = tk.Label(punktukartas2Frame, text = "Kopējie punkti", font = ('Cascadia Mono ExtraLight', 10))
+# punktukartas2label.pack()
+
+# punktikartas21label = tk.Label(punktukartas2Frame, text = "0", font = ('Cascadia Mono ExtraLight', 10))
+# punktikartas21label.pack()
+
+# punktikartas22label = tk.Label(punktukartas2Frame, text = "1", font = ('Cascadia Mono ExtraLight', 10))
+# punktikartas22label.pack()
 
 def open_about():
     about_window = tk.Toplevel(root)
