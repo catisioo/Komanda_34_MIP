@@ -5,6 +5,8 @@ import time
 
 global gui_number
 gui_number = generate_numbers()
+global whoStarts
+whoStarts = 1
 
 root = tk.Tk()
 
@@ -17,7 +19,7 @@ def gui_numuri():
 
 def retrieve_current_number():
     number = print_currentNr()
-    return number  
+    return number
 
 #EveryTurn
 def update_current_number(value):
@@ -40,19 +42,30 @@ def update_all_numbers(gui_number):
 def game_tick(value):
     game_status = check_game_status()
     divisor = value
+    global whoStarts
     
     if game_status == 1:
-        turn = 1
-        invalid = man_vs_machine(turn,divisor)
-        turn = 2
-        update_current_number(value)
-        if invalid == 1:
-            return "Invalid Divider"
-        time.wait(1)
-        man_vs_machine(turn,divisor)
-        update_current_number(value)
+        turn = whoStarts
+        
+        if turn == 1:
+            invalid = man_vs_machine(turn,divisor)
+            update_current_number(value)
+        
+            if invalid == 1:
+                return "Invalid Divider"
+            whoStarts = 2
+            AI_turn()
+        else:
+            AI_turn()
     else:
         print("Game not started!")
+
+def AI_turn():
+    global whoStarts
+    divisor = 2
+    man_vs_machine(whoStarts,divisor)
+    update_current_number(divisor)
+    whoStarts = 1
 
 def number_selection(currentNumber):
     chose_number(currentNumber)
@@ -101,12 +114,16 @@ div4button = tk.Button(rightFrame, text="/4", font=('Cascadia Mono ExtraLight', 
 div4button.pack(padx=20, pady=20)
 
 def radiobutton_izvele():
+    global whoStarts
     if izveles_vertiba.get() == 1:
         izvades_teksts.set(f"Izvēlēts 1. spēlētājs")
+        whoStarts = 1
         who_starts(whoStarts = 1)
     else:
         izvades_teksts.set(f"Izvēlēts 2. spēlētājs")
-        who_starts(whoStarts = 2)                                                    
+        whoStarts = 2
+        who_starts(whoStarts = 2)
+
 
 izveles_vertiba = tk.IntVar()
 izvades_teksts = tk.StringVar()
@@ -160,12 +177,19 @@ def new_game():
     update_all_numbers(guiNr)
     is_game_runing = 0
     update_game_status(is_game_runing)
+    global whoStarts
+    whoStarts = 1 
 
 def start_game():
     is_game_runing = 1
+    prepare_start()
     update_game_status(is_game_runing)
     update_current_number(1)
+    global whoStarts
     
+    if whoStarts == 2:
+        AI_turn()
+
 startGameButton = tk.Button((newGameFrame), text="Start Game", font=('Cascadia Mono ExtraLight', 10), command = start_game)
 startGameButton.pack(padx=0, pady=0)
 
