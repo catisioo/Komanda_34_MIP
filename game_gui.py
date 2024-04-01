@@ -10,7 +10,7 @@ whoStarts = 1
 
 root = tk.Tk()
 
-#
+#    
 def gui_numuri():
     global gui_number
     gui_number = generate_numbers()
@@ -31,7 +31,9 @@ def update_current_number(value):
 # New Game
 def update_all_numbers(gui_number):
     
+    dividerLabel.config(text="")
     currentNrLabel2.config(text="")
+    
     num1button.config(text=gui_number[0])
     num2button.config(text=gui_number[1])
     num3button.config(text=gui_number[2])
@@ -50,13 +52,23 @@ def game_tick(value):
         if turn == 1:
             invalid = man_vs_machine(turn,divisor)
             update_current_number(value)
-        
+            update_devider_label(divisor)
+            update_score()
+            
             if invalid == 1:
                 return "Invalid Divider"
+            
             whoStarts = 2
+            #time.sleep(1)
             AI_turn()
+            AI_devider = get_devider()
+            update_devider_label(AI_devider)
+            update_score()
         else:
             AI_turn()
+            AI_devider = get_devider()
+            update_devider_label(AI_devider)
+            update_score()
     else:
         print("Game not started!")
 
@@ -78,8 +90,22 @@ root.title("1. praktiskais darbs")
 currentNrLabel = tk.Label(root, text = "Current Number:", font = ('Cascadia Mono ExtraLight', 18))
 currentNrLabel.pack(padx = 20, pady = 40)
 
-currentNrLabel2= tk.Label(root, text='', font = ('Cascadia Mono ExtraLight', 18))
+currentNrLabel2 = tk.Label(root, text='', font = ('Cascadia Mono ExtraLight', 18))
 currentNrLabel2.pack(padx = 20, pady = 40)
+
+dividerLabel = tk.Label(root, text='', font = ('Cascadia Mono ExtraLight', 18))
+dividerLabel.pack(padx = 0, pady = 0)
+
+resultLabel = tk.Label(root, text='', font= ('Cascadia Mono ExtraLight', 18))
+resultLabel.pack(padx = 0, pady = 0 )
+
+def update_devider_label(value):
+    
+    divider = '/' + str(value)
+    dividerLabel.config(text=divider)
+
+def update_result_label(result):
+    dividerLabel.config(text=result)
 
 # Piedāvāju šādu variantu (iekomentētā daļa):
 
@@ -124,7 +150,6 @@ def radiobutton_izvele():
         whoStarts = 2
         who_starts(whoStarts = 2)
 
-
 izveles_vertiba = tk.IntVar()
 izvades_teksts = tk.StringVar()
 izveles_vertiba2 = tk.IntVar()
@@ -133,7 +158,7 @@ izvades_teksts2 = tk.StringVar()
 radio1Frame = tk.Frame(root)
 radio1Frame.place(x=55, y=40, width=200, height=75)
 
-radio1label = tk.Label(radio1Frame, text = "Izvēlies spēlētāju:", font = ('Cascadia Mono ExtraLight', 8))
+radio1label = tk.Label(radio1Frame, text = "Kurš spēlētājs sāks spēli?:", font = ('Cascadia Mono ExtraLight', 8))
 radio1label.pack()
 
 rb1 = tk.Radiobutton(radio1Frame, text="Spēlētājs 1", font=('Cascadia Mono ExtraLight', 8), variable=izveles_vertiba, value=1, command=radiobutton_izvele)
@@ -178,7 +203,8 @@ def new_game():
     is_game_runing = 0
     update_game_status(is_game_runing)
     global whoStarts
-    whoStarts = 1 
+    whoStarts = 1
+    update_score()
 
 def start_game():
     is_game_runing = 1
@@ -186,9 +212,12 @@ def start_game():
     update_game_status(is_game_runing)
     update_current_number(1)
     global whoStarts
+    update_score()
     
     if whoStarts == 2:
         AI_turn()
+        AI_devider = get_devider()
+        update_devider_label(AI_devider)
 
 startGameButton = tk.Button((newGameFrame), text="Start Game", font=('Cascadia Mono ExtraLight', 10), command = start_game)
 startGameButton.pack(padx=0, pady=0)
@@ -199,15 +228,20 @@ newGamebutton.pack(padx=0, pady=0)
 punktuFrame = tk.Frame(root)
 punktuFrame.place(x=360, y=520)
 
-def current_score():
-    #TODO get score from othermain.py
-    return None
+def update_score():
+    score = get_points()
+    print(score)
     
-
-punkti1label = tk.Label(punktuFrame, text = "1. spēlētāja punkti: 0", font = ('Cascadia Mono ExtraLight', 10))
+    player_Score = " Player: "+ str(score[0])
+    AI_Score = "Computer: " + str(score[1])
+    
+    punkti1label.config(text=player_Score)
+    punkti2label.config(text=AI_Score)
+    
+punkti1label = tk.Label(punktuFrame, text = "1. spēlētāja punkti: 0", font = ('Cascadia Mono ExtraLight', 10),relief="sunken")
 punkti1label.pack()
 
-punkti2label = tk.Label(punktuFrame, text = "2. spēlētāja punkti: 0", font = ('Cascadia Mono ExtraLight', 10))
+punkti2label = tk.Label(punktuFrame, text = "2. spēlētāja punkti: 0", font = ('Cascadia Mono ExtraLight', 10),relief="sunken")
 punkti2label.pack()
 
 def open_about():

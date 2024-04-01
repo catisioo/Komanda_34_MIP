@@ -29,6 +29,23 @@ gameNumbers = 0
 global game_status
 game_status = 0
 
+global retrieved_devider
+retrieved_devider = 0 
+
+def retrive_devider(eval):
+    global retrieved_devider
+    retrieved_devider = eval
+
+def get_points():
+  global p1Points
+  global p2Points
+  score = [p1Points,p2Points]
+  return score
+
+def get_devider():
+  global retrieved_devider
+  return retrieved_devider
+
 def update_game_status(is_game_runing):
   global game_status
   game_status = is_game_runing
@@ -163,7 +180,7 @@ def chose_number(value):
       return number
   
   else:
-    print("Speles laika nevar mainit sākuma skaitli!!")
+    print("Speles laika nevar mainit sākuma skaitli!")
 
 global firstGoes 
 firstGoes = 1
@@ -174,7 +191,7 @@ algorithm = 1
 def who_starts(whoStarts):
   global firstGoes
   firstGoes = whoStarts
-  print(whoStarts)
+  print(firstGoes)
 
 def algorithm(whichAlgorithm):
   global algorithm
@@ -193,6 +210,10 @@ def prepare_start():
   elif firstGoes == '3':
     machinevsmachine = True
     turn = 1
+  
+  global p1Points
+  global p2Points
+  p1Points = p2Points = 0 
 
 def print_currentNr():
   global number
@@ -234,6 +255,7 @@ def man_vs_machine(turn,divisor):
 
           print(f'Datora izvēlētais dalītājs: {eval}')
           number = number // eval
+          retrive_devider(eval)
           result(number)
           break
         else:
@@ -246,6 +268,7 @@ def man_vs_machine(turn,divisor):
           print('-----------------------------------')
           print(f'Datora izvēlētais dalītājs: {eval}')
           number = number // eval
+          retrive_devider(eval)
           result(number)
           break
         else:
