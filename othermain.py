@@ -1,5 +1,5 @@
 import random
-
+from timeit import default_timer as timer
 
 # NEMAINIT SPONGEBOB, SAVADAK VISS FAILA INDENTATION NOBRUUK !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 def sad():
@@ -173,7 +173,11 @@ while machinevsmachine == False:
       print('Nederīgs dalītājs')
   else:
     if algorithm == '1':
+      # timeris
+      time1 = timer()
       eval = minimax(number, 5, 1)
+      print('minmax time taken: ' + str(timer()-time1))
+      # timeris end
       if eval == 0:
         print(sad())
 
@@ -186,7 +190,11 @@ while machinevsmachine == False:
         print(f'spēle beidzas {eval}')
       turn = 1
     else:
+      # timeris
+      time2 = timer()
       eval = alpha_beta(number, 5, float('-inf'), float('inf'), 1)
+      print('alpha beta taken: ' + str(timer()-time2))
+      # timeris end
       if eval == 2 or eval == 3 or eval == 4:
         print('-----------------------------------')
         print(f'Datora izvēlētais dalītājs: {eval}')
