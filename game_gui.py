@@ -161,10 +161,10 @@ radio1Frame.place(x=55, y=40, width=200, height=75)
 radio1label = tk.Label(radio1Frame, text = "Kurš spēlētājs sāks spēli?:", font = ('Cascadia Mono ExtraLight', 8))
 radio1label.pack()
 
-rb1 = tk.Radiobutton(radio1Frame, text="Spēlētājs 1", font=('Cascadia Mono ExtraLight', 8), variable=izveles_vertiba, value=1, command=radiobutton_izvele)
+rb1 = tk.Radiobutton(radio1Frame, text="Spēlētājs", font=('Cascadia Mono ExtraLight', 8), variable=izveles_vertiba, value=1, command=radiobutton_izvele)
 rb1.pack()
 
-rb2 = tk.Radiobutton(radio1Frame, text="Spēlētājs 2", font=('Cascadia Mono ExtraLight', 8), variable=izveles_vertiba, value=2, command=radiobutton_izvele)
+rb2 = tk.Radiobutton(radio1Frame, text="Dators", font=('Cascadia Mono ExtraLight', 8), variable=izveles_vertiba, value=2, command=radiobutton_izvele)
 rb2.pack()
 
 def radiobutton_izvele2():
@@ -213,6 +213,7 @@ def start_game():
     update_current_number(1)
     global whoStarts
     update_score()
+    open_game_table()
     
     if whoStarts == 2:
         AI_turn()
@@ -243,6 +244,35 @@ punkti1label.pack()
 
 punkti2label = tk.Label(punktuFrame, text = "2. spēlētāja punkti: 0", font = ('Cascadia Mono ExtraLight', 10),relief="sunken")
 punkti2label.pack()
+
+def open_game_table():
+    game_table = tk.Toplevel(root)
+    game_table.title("Spēle")
+    game_table.geometry("900x600")
+    
+    leftFrame = tk.Frame(game_table)
+    leftFrame.place(x=50, y=150, width=200, height=400)
+    
+    rightFrame = tk.Frame(game_table)
+    rightFrame.place(x=600, y=200, width=200, height=300)
+
+    div2button = tk.Button(rightFrame, text="/2", font=('Cascadia Mono ExtraLight', 16),command=lambda: game_tick(2))
+    div2button.pack(padx=20, pady=20)
+
+    div3button = tk.Button(rightFrame, text="/3", font=('Cascadia Mono ExtraLight', 16),command=lambda: game_tick(3))
+    div3button.pack(padx=20, pady=0)
+
+    div4button = tk.Button(rightFrame, text="/4", font=('Cascadia Mono ExtraLight', 16),command=lambda: game_tick(4))
+    div4button.pack(padx=20, pady=20)
+
+    turn_history_label = tk.Label(leftFrame, text="Turn History", font=('Cascadia Mono ExtraLight', 16))
+    turn_history_label.pack()
+
+    resultListBox = tk.Listbox(leftFrame)
+    resultListBox.pack()
+    
+    current_number = tk.Label(game_table, text="Current Number", font=('Cascadia Mono ExtraLight', 16))
+    current_number.pack()
 
 def open_about():
     about_window = tk.Toplevel(root)
