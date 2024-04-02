@@ -5,12 +5,18 @@ import time
 
 global gui_number
 gui_number = generate_numbers()
+
 global whoStarts
 whoStarts = 1
 
-root = tk.Tk()
+global history
+history = []
 
-#    
+global history_turn
+history_turn = 1
+
+root = tk.Tk()
+# gui number    
 def gui_numuri():
     global gui_number
     gui_number = generate_numbers()
@@ -21,17 +27,16 @@ def retrieve_current_number():
     number = print_currentNr()
     return number
 
-#EveryTurn
+# Every Turn
 def update_current_number(value):
-    #print(value)
     currentNr = retrieve_current_number()
-    #print(currentNr)
-    currentNrLabel2.config(text= currentNr)
+    currentNrLabel2.config(text = currentNr)
+    return currentNr
 
 # New Game
 def update_all_numbers(gui_number):
     
-    dividerLabel.config(text="")
+    #dividerLabel.config(text="")
     currentNrLabel2.config(text="")
     
     num1button.config(text=gui_number[0])
@@ -40,7 +45,7 @@ def update_all_numbers(gui_number):
     num4button.config(text=gui_number[3])
     num5button.config(text=gui_number[4])
 
-#executes after every turn
+# executes after every turn
 def game_tick(value):
     game_status = check_game_status()
     divisor = value
@@ -50,25 +55,48 @@ def game_tick(value):
         turn = whoStarts
         
         if turn == 1:
+            currentNR = update_current_number(value)
+            if currentNR % 2 != 0 and currentNR % 3 != 0 and currentNR % 4 != 0:
+                print("Spele Beigusies")
+                game_end()
+                return "Spēle beigusies!"
+            
+            if currentNR % divisor != 0:
+                print("Invalid Divider")
+                game_end()
+                return "Invalid Divider"
+            
             invalid = man_vs_machine(turn,divisor)
-            update_current_number(value)
             update_devider_label(divisor)
             update_score()
             
             if invalid == 1:
                 return "Invalid Divider"
             
+            update_turn_history(currentNR,divisor)
+            
             whoStarts = 2
             #time.sleep(1)
+            currentNR = update_current_number(value)
             AI_turn()
             AI_devider = get_devider()
             update_devider_label(AI_devider)
             update_score()
+            update_turn_history(currentNR,AI_devider)
+            currentNR = update_current_number(value)
+            if currentNR % 2 != 0 and currentNR % 3 != 0 and currentNR % 4 != 0:
+                game_end()
+                print("Spele Beigusies")
+                return "Spēle beigusies!"
+        
         else:
             AI_turn()
             AI_devider = get_devider()
+            currentNR = update_current_number(value)
+            update_turn_history(currentNR,AI_devider)
             update_devider_label(AI_devider)
             update_score()
+    
     else:
         print("Game not started!")
 
@@ -93,32 +121,38 @@ currentNrLabel.pack(padx = 20, pady = 40)
 currentNrLabel2 = tk.Label(root, text='', font = ('Cascadia Mono ExtraLight', 18))
 currentNrLabel2.pack(padx = 20, pady = 40)
 
-dividerLabel = tk.Label(root, text='', font = ('Cascadia Mono ExtraLight', 18))
-dividerLabel.pack(padx = 0, pady = 0)
+#dividerLabel = tk.Label(root, text='', font = ('Cascadia Mono ExtraLight', 18))
+#dividerLabel.pack(padx = 0, pady = 0)
 
-resultLabel = tk.Label(root, text='', font= ('Cascadia Mono ExtraLight', 18))
-resultLabel.pack(padx = 0, pady = 0 )
+#resultLabel = tk.Label(root, text='', font= ('Cascadia Mono ExtraLight', 18))
+#resultLabel.pack(padx = 0, pady = 0 )
+
+turn_history_label = tk.Label(root, text="Turn History", font=('Cascadia Mono ExtraLight', 16))
+turn_history_label.pack(padx = 20, pady = 0)
+
+resultListBox = tk.Listbox(root)
+resultListBox.pack()
 
 def update_devider_label(value):
-    
     divider = '/' + str(value)
-    dividerLabel.config(text=divider)
-
+    #dividerLabel.config(text=divider)
+    
 def update_result_label(result):
-    dividerLabel.config(text=result)
+    return None
+    #dividerLabel.config(text=result)
 
 # Piedāvāju šādu variantu (iekomentētā daļa):
 
 leftFrame = tk.Frame(root)
 leftFrame.place(x=50, y=150, width=200, height=400)
 
-num1button = tk.Button(leftFrame, text=gui_number[0], font=('Cascadia Mono ExtraLight', 16),command=lambda: number_selection(gui_number[0]))
+num1button = tk.Button(leftFrame, text=gui_number[0], font=('Cascadia Mono ExtraLight', 16), command=lambda: number_selection(gui_number[0]))
 num1button.pack(padx=20, pady=10)
 
-num2button = tk.Button(leftFrame, text=gui_number[1], font=('Cascadia Mono ExtraLight', 16),command=lambda: number_selection(gui_number[1]))
+num2button = tk.Button(leftFrame, text=gui_number[1], font=('Cascadia Mono ExtraLight', 16), command=lambda: number_selection(gui_number[1]))
 num2button.pack(padx=20, pady=10)
 
-num3button = tk.Button(leftFrame, text=gui_number[2], font=('Cascadia Mono ExtraLight', 16),command=lambda: number_selection( gui_number[2]))
+num3button = tk.Button(leftFrame, text=gui_number[2], font=('Cascadia Mono ExtraLight', 16), command=lambda: number_selection( gui_number[2]))
 num3button.pack(padx=20, pady=10)
 
 num4button = tk.Button(leftFrame, text=gui_number[3], font=('Cascadia Mono ExtraLight', 16),command=lambda: number_selection(gui_number[3]))
@@ -130,13 +164,13 @@ num5button.pack(padx=20, pady=10)
 rightFrame = tk.Frame(root)
 rightFrame.place(x=600, y=200, width=200, height=300)
 
-div2button = tk.Button(rightFrame, text="/2", font=('Cascadia Mono ExtraLight', 16),command=lambda: game_tick(2))
+div2button = tk.Button(rightFrame, text="/2", font=('Cascadia Mono ExtraLight', 16), command=lambda: game_tick(2))
 div2button.pack(padx=20, pady=20)
 
-div3button = tk.Button(rightFrame, text="/3", font=('Cascadia Mono ExtraLight', 16),command=lambda: game_tick(3))
+div3button = tk.Button(rightFrame, text="/3", font=('Cascadia Mono ExtraLight', 16), command=lambda: game_tick(3))
 div3button.pack(padx=20, pady=0)
 
-div4button = tk.Button(rightFrame, text="/4", font=('Cascadia Mono ExtraLight', 16),command=lambda: game_tick(4))
+div4button = tk.Button(rightFrame, text="/4", font=('Cascadia Mono ExtraLight', 16), command=lambda: game_tick(4))
 div4button.pack(padx=20, pady=20)
 
 def radiobutton_izvele():
@@ -158,7 +192,7 @@ izvades_teksts2 = tk.StringVar()
 radio1Frame = tk.Frame(root)
 radio1Frame.place(x=55, y=40, width=200, height=75)
 
-radio1label = tk.Label(radio1Frame, text = "Kurš spēlētājs sāks spēli?:", font = ('Cascadia Mono ExtraLight', 8))
+radio1label = tk.Label(radio1Frame, text = "Kurš spēlētājs sāks spēli?", font = ('Cascadia Mono ExtraLight', 8))
 radio1label.pack()
 
 rb1 = tk.Radiobutton(radio1Frame, text="Spēlētājs", font=('Cascadia Mono ExtraLight', 8), variable=izveles_vertiba, value=1, command=radiobutton_izvele)
@@ -202,23 +236,42 @@ def new_game():
     update_all_numbers(guiNr)
     is_game_runing = 0
     update_game_status(is_game_runing)
+    
     global whoStarts
     whoStarts = 1
+    
+    global history_turn
     update_score()
+    lenght = len(history)    
+    print(history)
+    i = 0
+    
+    while i  <= history_turn:
+        resultListBox.delete(0)
+        i=1+i
+    
+    history_turn = 1    
 
 def start_game():
     is_game_runing = 1
     prepare_start()
     update_game_status(is_game_runing)
-    update_current_number(1)
+    currentNR = update_current_number(1)
+    
     global whoStarts
     update_score()
-    open_game_table()
+    #open_game_table()
     
     if whoStarts == 2:
         AI_turn()
         AI_devider = get_devider()
         update_devider_label(AI_devider)
+        update_turn_history(currentNR,AI_devider)
+
+def game_end():
+    is_game_runing = 0
+    open_game_over()
+    return "Spele Beigusies"
 
 startGameButton = tk.Button((newGameFrame), text="Start Game", font=('Cascadia Mono ExtraLight', 10), command = start_game)
 startGameButton.pack(padx=0, pady=0)
@@ -238,6 +291,7 @@ def update_score():
     
     punkti1label.config(text=player_Score)
     punkti2label.config(text=AI_Score)
+    return score
     
 punkti1label = tk.Label(punktuFrame, text = "1. spēlētāja punkti: 0", font = ('Cascadia Mono ExtraLight', 10),relief="sunken")
 punkti1label.pack()
@@ -245,34 +299,30 @@ punkti1label.pack()
 punkti2label = tk.Label(punktuFrame, text = "2. spēlētāja punkti: 0", font = ('Cascadia Mono ExtraLight', 10),relief="sunken")
 punkti2label.pack()
 
-def open_game_table():
-    game_table = tk.Toplevel(root)
-    game_table.title("Spēle")
-    game_table.geometry("900x600")
+def update_turn_history(number,divider):
+    result = number / divider
+    global history_turn
+    history_entry = str(number)+ " /" +str(divider)+" = "+ str(result) 
+    resultListBox.insert(history_turn,history_entry)
+    history_turn = history_turn + 1
+    history.append(history_entry)
+
+def open_game_over():
+    game_end_window = tk.Toplevel(root)
+    game_end_window.title("Game Over!")
+    score = get_points()
     
-    leftFrame = tk.Frame(game_table)
-    leftFrame.place(x=50, y=150, width=200, height=400)
+    if score[0] == score[1]:
+        uzvaretajs = tk.Label(game_end_window,text="Neizšķirts!")
+        uzvaretajs.pack()
     
-    rightFrame = tk.Frame(game_table)
-    rightFrame.place(x=600, y=200, width=200, height=300)
-
-    div2button = tk.Button(rightFrame, text="/2", font=('Cascadia Mono ExtraLight', 16),command=lambda: game_tick(2))
-    div2button.pack(padx=20, pady=20)
-
-    div3button = tk.Button(rightFrame, text="/3", font=('Cascadia Mono ExtraLight', 16),command=lambda: game_tick(3))
-    div3button.pack(padx=20, pady=0)
-
-    div4button = tk.Button(rightFrame, text="/4", font=('Cascadia Mono ExtraLight', 16),command=lambda: game_tick(4))
-    div4button.pack(padx=20, pady=20)
-
-    turn_history_label = tk.Label(leftFrame, text="Turn History", font=('Cascadia Mono ExtraLight', 16))
-    turn_history_label.pack()
-
-    resultListBox = tk.Listbox(leftFrame)
-    resultListBox.pack()
+    if score[0] > score[1]:
+        uzvaretajs = tk.Label(game_end_window,text="Tu uzvarēji!")
+        uzvaretajs.pack()
     
-    current_number = tk.Label(game_table, text="Current Number", font=('Cascadia Mono ExtraLight', 16))
-    current_number.pack()
+    if score[0] < score[1]:
+        uzvaretajs = tk.Label(game_end_window,text="Tu zaudēji!")       
+        uzvaretajs.pack()
 
 def open_about():
     about_window = tk.Toplevel(root)
