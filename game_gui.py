@@ -81,13 +81,13 @@ def game_tick(value):
             AI_devider = get_devider()
             update_devider_label(AI_devider)
             update_score()
-            update_turn_history(currentNR,AI_devider)
+            #update_turn_history(currentNR,AI_devider)
             currentNR = update_current_number(value)
             if currentNR % 2 != 0 and currentNR % 3 != 0 and currentNR % 4 != 0:
                 game_end()
                 print("Spele Beigusies")
                 return "Spēle beigusies!"
-        
+            update_turn_history(currentNR,AI_devider)
         else:
             AI_turn()
             AI_devider = get_devider()
@@ -286,17 +286,17 @@ def update_score():
     score = get_points()
     print(score)
     
-    player_Score = " Player: "+ str(score[0])
-    AI_Score = "Computer: " + str(score[1])
+    player_Score = "Spēlētāja punkti: "+ str(score[0])
+    AI_Score = "   Datora punkti: " + str(score[1])
     
     punkti1label.config(text=player_Score)
     punkti2label.config(text=AI_Score)
     return score
     
-punkti1label = tk.Label(punktuFrame, text = "1. spēlētāja punkti: 0", font = ('Cascadia Mono ExtraLight', 10),relief="sunken")
+punkti1label = tk.Label(punktuFrame, text = "Spēlētāja punkti: 0", font = ('Cascadia Mono ExtraLight', 10),relief="sunken")
 punkti1label.pack()
 
-punkti2label = tk.Label(punktuFrame, text = "2. spēlētāja punkti: 0", font = ('Cascadia Mono ExtraLight', 10),relief="sunken")
+punkti2label = tk.Label(punktuFrame, text = "   Datora punkti: 0", font = ('Cascadia Mono ExtraLight', 10),relief="sunken")
 punkti2label.pack()
 
 def update_turn_history(number,divider):
