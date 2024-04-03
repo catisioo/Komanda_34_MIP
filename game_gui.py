@@ -63,7 +63,6 @@ def game_tick(value):
             
             if currentNR % divisor != 0:
                 print("Invalid Divider")
-                game_end()
                 return "Invalid Divider"
             
             invalid = man_vs_machine(turn,divisor)
@@ -266,6 +265,7 @@ def start_game():
         AI_turn()
         AI_devider = get_devider()
         update_devider_label(AI_devider)
+        update_score()
         update_turn_history(currentNR,AI_devider)
 
 def game_end():
