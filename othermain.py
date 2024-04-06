@@ -66,8 +66,8 @@ def generate_numbers():
   return numbers
 
 
-def result(number):
-  global p1Points, p2Points, turn
+def result(number, turn):
+  global p1Points, p2Points
   if turn == 2:
     if number % 2 == 0:
       p1Points -= 1
@@ -239,7 +239,7 @@ def man_vs_machine(turn,divisor):
     if turn == 1:
       if divisor in [2, 3, 4] and number % divisor == 0:
         number = number // int(divisor)
-        result(number)
+        result(number, turn)
         turn = 2
         break
       else:
@@ -256,7 +256,7 @@ def man_vs_machine(turn,divisor):
           print(f'Datora izvēlētais dalītājs: {eval}')
           number = number // eval
           retrive_devider(eval)
-          result(number)
+          result(number, turn)
           break
         else:
           print(f'spēle beidzas {eval}')
@@ -269,7 +269,7 @@ def man_vs_machine(turn,divisor):
           print(f'Datora izvēlētais dalītājs: {eval}')
           number = number // eval
           retrive_devider(eval)
-          result(number)
+          result(number, turn)
           break
         else:
           print(f'spēle beidzas {eval}')
@@ -305,7 +305,7 @@ def machine_vs_machine():
           print('-----------------------------------')
           print(f'Datora 1 izvēlētais dalītājs: {eval}')
           number = number // eval
-          result(number)
+          result(number, turn)
         else:
           print(f'spēle beidzas {eval}')
         turn = 2
@@ -315,7 +315,7 @@ def machine_vs_machine():
           print('-----------------------------------')
           print(f'Datora 1 izvēlētais dalītājs: {eval}')
           number = number // eval
-          result(number)
+          result(number, turn)
         else:
           print(f'spēle beidzas {eval}')
         turn = 2
@@ -329,7 +329,7 @@ def machine_vs_machine():
           print('-----------------------------------')
           print(f'Datora 2 izvēlētais dalītājs: {eval}')
           number = number // eval
-          result(number)
+          result(number, turn)
         else:
           print(f'spēle beidzas {eval}')
         turn = 1
@@ -339,7 +339,7 @@ def machine_vs_machine():
           print('-----------------------------------')
           print(f'Datora 2 izvēlētais dalītājs: {eval}')
           number = number // eval
-          result(number)
+          result(number, turn)
         else:
           print(f'spēle beidzas {eval}')
         turn = 1
