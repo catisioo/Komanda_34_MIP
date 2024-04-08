@@ -1,6 +1,5 @@
 import random
 
-
 # NEMAINIT SPONGEBOB, SAVADAK VISS FAILA INDENTATION NOBRUUK !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 def sad():
   return (
@@ -64,7 +63,6 @@ def generate_numbers():
       numbers.append(number)
   gameNumbers = numbers   
   return numbers
-
 
 def result(number, turn):
   global p1Points, p2Points
@@ -274,101 +272,3 @@ def man_vs_machine(turn,divisor):
         else:
           print(f'spēle beidzas {eval}')
           break
-        
-
-# Machine vs Machine gamemode
-
-def machine_vs_machine():
-  if machinevsmachine == True:
-    turn = random.randint(1, 2)
-
-  while machinevsmachine == True:
-    print(f'Skaitlis: {number}')
-
-    if number <= 10:
-      break
-    if number % 2 != 0 and number % 3 != 0 and number % 4 != 0:
-      print(
-          "\n \n $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-      )
-      print("\n \n WAOW SPELE BEIGUSIES 🪥")
-      print('  Skaitlis vairs nedalās ar 2,3 vai 4')
-      break
-
-    if turn == 1:
-      if algorithm == '1':
-        eval = minimax(number, 2, 1)
-        if eval == 0:
-          print(sad())
-
-        if eval == 2 or eval == 3 or eval == 4:
-          print('-----------------------------------')
-          print(f'Datora 1 izvēlētais dalītājs: {eval}')
-          number = number // eval
-          result(number, turn)
-        else:
-          print(f'spēle beidzas {eval}')
-        turn = 2
-      else:
-        eval = alpha_beta(number, 2, float('-inf'), float('inf'), 1)
-        if eval == 2 or eval == 3 or eval == 4:
-          print('-----------------------------------')
-          print(f'Datora 1 izvēlētais dalītājs: {eval}')
-          number = number // eval
-          result(number, turn)
-        else:
-          print(f'spēle beidzas {eval}')
-        turn = 2
-    else:
-      if algorithm == '1':
-        eval = minimax(number, 2, 1)
-        if eval == 0:
-          print(sad())
-
-        if eval == 2 or eval == 3 or eval == 4:
-          print('-----------------------------------')
-          print(f'Datora 2 izvēlētais dalītājs: {eval}')
-          number = number // eval
-          result(number, turn)
-        else:
-          print(f'spēle beidzas {eval}')
-        turn = 1
-      else:
-        eval = alpha_beta(number, 2, float('-inf'), float('inf'), 1)
-        if eval == 2 or eval == 3 or eval == 4:
-          print('-----------------------------------')
-          print(f'Datora 2 izvēlētais dalītājs: {eval}')
-          number = number // eval
-          result(number, turn)
-        else:
-          print(f'spēle beidzas {eval}')
-        turn = 1
-
-  if machinevsmachine == False:
-    var = {
-        p1Points: "Speletajs 1 (Cilveks)",
-        p2Points: "Speletajs 2 (Dators)  (Tu zaudēji)"
-    }
-  else:
-    var = {p1Points: "Dators 1", p2Points: "Dators 2"}
-  print("\n")
-  print('Pirmā spēlētāja punkti: ' + str(p1Points))
-  print('Otrā spēlētāja punkti: ' + str(p2Points))
-  if p1Points > p2Points and machinevsmachine == False:
-    print(happi())
-    print("\n $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
-  elif p1Points < p2Points:
-    print(sad())
-    print("\n $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
-  if p2Points == p1Points:
-    print("\nNeizšķirts")
-    print("\n $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
-  else:
-    print("\n Uzvar:", var.get(max(p2Points, p1Points)))
-    print("\n $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
-  if machinevsmachine == True:
-    print(botvbot())
-    var = {p1Points: "Dators 1)", p2Points: "Dators 2"}
-    print(
-        "\n \n \n $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-    )
