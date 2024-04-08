@@ -16,3 +16,5 @@ Ja dalīšanas rezultātā veidojas pāra skaitlis, tad no pretinieka punktiem t
 
 Spēle beidzas, kā tikko ir iegūts skaitlis, kas ir mazāks vai vienāds ar 10. Ja spēlētāju punktu skaits ir vienāds, tad rezultāts ir neizšķirts. Pretējā gadījumā uzvar spēlētājs, kam ir vairāk punktu. 
 
+##Komandas ieviestās prasības
+Ne vienmēr saģenerētu skaitli būs iespējams sadalīt tik tālu, kad skaitlis ir mazāks par 10, kā rezultātā spēle beidzas, kad nav vairs iespējams sadalīt skaitli tālāk ar 2, 3 vai 4, nevis, kad skaitlis ir mazāks par 10 (ja skaitlis ir mazāks par 10, bet to ir iespējams sadalīt, tad arī spēle beidzas sakarā ar sākotnējiem noteikumiem).
